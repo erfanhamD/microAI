@@ -43,11 +43,11 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/")
+@app.get("/index")
 async def data_prep(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "prompt": "Upload your data file"})
 
-@app.post("/", response_class=Response)
+@app.post("/index", response_class=Response)
 async def data_prep(request: Request, data: UploadFile = File(...)):
     if data.filename.endswith(".csv"):
         try:
