@@ -43,11 +43,11 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/home")
+@app.get("/")
 async def data_prep(request: Request):
     return templates.TemplateResponse("home.html", {"request": request, "prompt": "Upload your data file"})
 
-@app.post("/home", response_class=Response)
+@app.post("/", response_class=Response)
 async def data_prep(request: Request, data: UploadFile = File(...)):
     if data.filename.endswith(".csv"):
         try:
@@ -65,6 +65,6 @@ async def data_prep(request: Request, data: UploadFile = File(...)):
             np.savetxt(file_path,Cl_map)
             return FileResponse(path = file_path, media_type="text/csv", filename = download_file_name)
         except:
-            return templates.TemplateResponse("home.html", {"request": request, 'prompt': 'csv file does not match the format'})
+            return templates.TemplateResponse("index.html", {"request": request, 'prompt': 'csv file does not match the format'})
     else:
-        return templates.TemplateResponse("home.html", {"request": request, 'prompt': 'File extension not supported'})
+        return templates.TemplateResponse("index.html", {"request": request, 'prompt': 'File extension not supported'})
