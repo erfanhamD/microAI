@@ -1,0 +1,54 @@
+body {
+    background-color: rgb(255, 255, 255);
+  }
+.bgimg {
+    background-image: url('windmapr.png');
+    text-align: center;
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.login h1 {
+    display: block;
+    text-align: center;
+    color: rgb(206, 79, 79);
+}
+
+form {
+    text-align: center;
+    color:black;
+    font-size: 14px;
+   
+}
+.file_in{
+    text-align: center;
+    color:black;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+}
+.btn {
+    text-align: center;
+    font-size: 14px;
+    background: #429699;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border-radius: 30%;
+    border: 0;
+    box-shadow: none;
+    align-items: center;
+    justify-content: center;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    color: cornsilk;
+}
+body .prompt{
+    color : red;
+}
+body .powered{
+    color : #000000;
+}

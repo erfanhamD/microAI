@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>microAI</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+<body class = "bgimg">
+    <div class="login">
+        <br></br><br></br>
+        <h1 class = "caption">microAI</h1><br></br>
+        <form action='home' method="post" enctype="multipart/form-data" class = "form">
+          <input type="file" name="data" placeholder="Age" required="required" /><br></br>
+            <button type="submit" class="btn">Predict</button>
+        </form>
+        <p class = "prompt">
+          Prompt : {{prompt}}
+        </p>
+        <p class = "powered">
+          Powered by <a href="https://www.fastapi.tiangolo.com//">fastapi</a>
+        </p>
+       <br>
+       <br>
+     </div>
+</body>
+</html>
