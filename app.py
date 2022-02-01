@@ -45,7 +45,7 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
 async def data_prep(request: Request):
-    return templates.TemplateResponse("home.html", {"request": request, "prompt": "Upload your data file"})
+    return templates.TemplateResponse("index.html", {"request": request, "prompt": "Upload your data file"})
 
 @app.post("/", response_class=Response)
 async def data_prep(request: Request, data: UploadFile = File(...)):
