@@ -20,3 +20,4 @@ starlette==0.17.1
 torch==1.10.2+cpu
 typing_extensions==4.0.1
 uvicorn==0.17.1
+
