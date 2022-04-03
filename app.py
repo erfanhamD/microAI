@@ -44,7 +44,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/index")
+@app.get("/")
 async def data_prep(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "prompt": "Upload your data file"})
 
