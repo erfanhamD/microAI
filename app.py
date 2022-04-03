@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import pickle
 import torch
 import torch.nn as nn
 from fastapi import FastAPI, File, Response, UploadFile
@@ -24,19 +25,19 @@ class Lift_base_network(nn.Module):
         x = self.block(x)
         return x
 
-def preprocess(Data_addr: str, x_min, x_range):
+def preprocess(Data_addr: str):
     Data = pd.read_csv(Data_addr, header = None, delimiter=',')
     Data[4] = Data[4]/Data[0]
-    Data = (Data - x_min[:-2])/x_range[:-2]
+    scaler = pickle.load(open('x_mm_scaler.pkl', 'rb'))
+    Data = scaler.transform(Data)
     return Data
 
-def inference(Data, model, x_min, x_range):
-    Data_torch = torch.from_numpy(Data.to_numpy())
+def inference(Data, model):
+    Data_torch = torch.from_numpy(Data)
     Cl = model(Data_torch.float())
-    Cl_map = torch.zeros_like(Cl)
-    Cl_map[:, 0] = Cl[:, 0] * x_range[-2] + x_min[-2]
-    Cl_map[:, 1] = Cl[:, 1] * x_range[-1] + x_min[-1]
-    Cl_map = Cl_map.cpu().detach().numpy()
+    scaler = pickle.load(open('y_mm_scaler.pkl', 'rb'))
+    Cl = Cl.cpu().detach().numpy()
+    Cl_map = scaler.inverse_transform(Cl)
     return Cl_map
 
 app = FastAPI()
@@ -51,15 +52,13 @@ async def data_prep(request: Request):
 async def data_prep(request: Request, data: UploadFile = File(...)):
     if data.filename.endswith(".csv"):
         try:
-            x_min = np.loadtxt("min_.csv")
-            x_range = np.loadtxt("range_.csv")
             file_location = f"data/{data.filename}"
             with open(file_location, "wb+") as raw_data:
                 raw_data.write(data.file.read())
             model = Lift_base_network()
-            model.load_state_dict(torch.load("model_state_dict_25Nov"))
-            Data = preprocess(file_location, x_min, x_range)
-            Cl_map = inference(Data, model, x_min, x_range)
+            model.load_state_dict(torch.load("model_state_dict_3Apr_mm"))
+            Data = preprocess(file_location)
+            Cl_map = inference(Data, model)
             file_path = "data/Cl_map_"+data.filename
             download_file_name = "Cl_map_"+data.filename
             np.savetxt(file_path,Cl_map)
