@@ -42,6 +42,7 @@ def inference(Data, model):
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/figures", StaticFiles(directory="figures"), name="figures")
 templates = Jinja2Templates(directory="templates")
 
 @app.get("/")
@@ -50,7 +51,7 @@ async def data_prep(request: Request):
 @app.get("/aboutus")
 async def aboutus(request: Request):
     return templates.TemplateResponse("aboutus.html", {"request": request})
-    
+
 @app.post("/index", response_class=Response)
 async def data_prep(request: Request, data: UploadFile = File(...)):
     if data.filename.endswith(".csv"):
