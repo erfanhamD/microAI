@@ -47,7 +47,10 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 async def data_prep(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "prompt": "Upload your data file"})
-
+@app.get("/aboutus")
+async def aboutus(request: Request):
+    return templates.TemplateResponse("aboutus.html", {"request": request})
+    
 @app.post("/index", response_class=Response)
 async def data_prep(request: Request, data: UploadFile = File(...)):
     if data.filename.endswith(".csv"):
