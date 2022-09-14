@@ -2,20 +2,24 @@
 <head>
     <title>microAI</title>
     <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <script type="module"
+      src="https://gradio.s3-us-west-2.amazonaws.com/3.3/gradio.js">
+    </script>
 </head>
 <body class = "bgimg">
     <div class="login">
         <br></br><br></br>
         <h1 class = "caption">microAI</h1><br></br>
-        <form action='index' method="post" enctype="multipart/form-data" class = "form">
+        <!-- <form action='index' method="post" enctype="multipart/form-data" class = "form">
           <input type="file" name="data" placeholder="Age" required="required" /><br></br>
             <button type="submit" class="btn">Predict</button>
-        </form>
-        <p class = "prompt">
+        </form> -->
+        <gradio-app space="erfanhamdi/microAI"></gradio-app>
+        <!-- <p class = "prompt">
           Prompt : {{prompt}}
         </p>
         <p>Instructions: create a csv file with this columns and upload it to microAI ['AR', 'Re', 'kapp', '2y/H', '2z/H']<br>
-        do not add a header to your data. The result would automatically get downloaded. It would have 2 columns: ['cly', 'clz']</p>
+        do not add a header to your data. The result would automatically get downloaded. It would have 2 columns: ['cly', 'clz']</p> -->
         <p><a href="/aboutus">about us</a></p>
         <p class = "powered">
           Powered by <a href="https://www.fastapi.tiangolo.com//">fastapi</a>
