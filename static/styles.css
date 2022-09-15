@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(255, 255, 255);
+    background-color:#0A0F19;
   }
 .bgimg {
     text-align: center;
@@ -7,12 +7,13 @@ body {
     background-position: center;
     background-size: cover;
     position: relative;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: "Ubuntu";
+    color :#A6B5FB; 
 }
 .login h1 {
     display: block;
     text-align: center;
-    color: rgb(206, 79, 79);
+    color: rgb(#A6B5FB);
 }
 
 form {
@@ -46,8 +47,30 @@ form {
     color: cornsilk;
 }
 body .prompt{
-    color : red;
+    color : rgb(228, 210, 210);
 }
 body .powered{
-    color : #000000;
+    color : #A6B5FB;
 }
+a:link {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  a:visited {
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: green;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+  
+  a:active {
+    color: green;
+    background-color: transparent;
+    text-decoration: underline;
+  }
